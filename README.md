@@ -33,7 +33,7 @@ git clone https://github.com/your-username/twitter-trends-scraper.git
 2. Install the required Python packages:
 
 ```
-pip install selenium pymongo flask
+pip install -r requirements.txt
 ```
 
 3. Download the Chrome WebDriver for your Chrome version and operating system from the official website: https://sites.google.com/a/chromium.org/chromedriver/downloads
