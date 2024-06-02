@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Twitter Trends</title>
+</head>
+<body>
+    <h1>These are the most happening topics as on {{ data['datetime'] }}</h1>
+    <ul>
+        <li>{{ data['nameoftrend1'] }}</li>
+        <li>{{ data['nameoftrend2'] }}</li>
+        <li>{{ data['nameoftrend3'] }}</li>
+        <li>{{ data['nameoftrend4'] }}</li>
+        <li>{{ data['nameoftrend5'] }}</li>
+    </ul>
+    <p>The IP address used for this query was {{ data['ip_address'] }}.</p>
+    <pre>{{ data | tojson }}</pre>
+    <a href="{{ url_for('index') }}">Run the query again</a>
+</body>
+</html>
