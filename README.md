@@ -2,6 +2,10 @@
 
 This project is a Python script that uses Selenium to scrape the top 5 trending topics from the Twitter homepage. It logs in to Twitter using your provided credentials and fetches the trending topics from the "What's Happening" section. The script stores the results in a MongoDB database and provides a simple web interface to run the script and view the results.
 
+# Sample 
+
+https://jinit-bhatt.github.io/Twitter-X-Scraping/sample.html
+
 ## Features
 
 - Scrapes the top 5 trending topics from the Twitter homepage
