@@ -27,7 +27,7 @@ https://jinit-bhatt.github.io/Twitter-X-Scraping/sample.html
 1. Clone the repository:
 
 ```
-git clone https://github.com/your-username/twitter-x-scraper.git
+git clone https://github.com/jinit-bhatt/Twitter-X-Scraping.git
 ```
 
 2. Install the required Python packages:
