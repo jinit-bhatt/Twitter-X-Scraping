@@ -5,8 +5,6 @@ from selenium import webdriver
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from pymongo import MongoClient
 from datetime import datetime
@@ -29,11 +27,13 @@ def fetch_twitter_trends():
         'proxyAutoconfigUrl': './us-ca.pac'
     })
 
-
     chrome_options = Options()
-    chrome_options.add_argument('--proxy-server=%s' % proxy.http_proxy)
+    chrome_options.binary_location = "/usr/bin/google-chrome-stable"
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
 
-    driver = webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Chrome(executable_path="/usr/bin/chromedriver", options=chrome_options)
 
 
     driver.get("https://x.com/i/flow/login")

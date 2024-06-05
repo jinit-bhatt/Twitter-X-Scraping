@@ -1,0 +1,84 @@
+To set up Chrome and Chromedriver for hosting online using GitHub and AWS, you can use AWS Elastic Beanstalk, which is a Platform as a Service (PaaS) that simplifies the setup, deployment, and maintenance of your app on AWS. Here's a step-by-step guide:
+
+1. Create a `Procfile` in the root directory of your project. This file is used by AWS Elastic Beanstalk to determine how to run your application.
+
+```Procfile
+web: python script.py
+```
+
+2. Create a `requirements.txt` file in the root directory of your project to specify the Python packages to install.
+
+```requirements.txt
+requests~=2.32.3
+python-dotenv~=1.0.1
+selenium~=4.21.0
+pymongo~=4.7.2
+Flask~=2.3.2
+```
+
+3. Create a new file in your repository at `.ebextensions/chromedriver.config`. This file will define the commands to install Google Chrome and Chromedriver on the AWS Elastic Beanstalk environment.
+
+```yaml
+packages:
+  yum:
+    google-chrome-stable: []
+    unzip: []
+
+commands:
+  01_download_chromedriver:
+    command: "wget https://chromedriver.storage.googleapis.com/94.0.4606.61/chromedriver_linux64.zip"
+  02_unzip_chromedriver:
+    command: "unzip chromedriver_linux64.zip"
+  03_move_chromedriver:
+    command: "mv chromedriver /usr/bin/chromedriver"
+  04_chmod_chromedriver:
+    command: "chmod 755 /usr/bin/chromedriver"
+```
+
+4. In your Python script, use the path to Chrome and Chromedriver:
+
+```python
+import os
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+chrome_options = Options()
+chrome_options.binary_location = "/usr/bin/google-chrome-stable"
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument("--no-sandbox")
+
+driver = webdriver.Chrome(executable_path="/usr/bin/chromedriver", options=chrome_options)
+```
+
+5. Install the Elastic Beanstalk Command Line Interface (EB CLI). You can do this with pip:
+
+```bash
+pip install awsebcli --upgrade --user
+```
+
+6. Navigate to your project directory and initialize your Elastic Beanstalk application:
+
+```bash
+eb init -p python-3.9 my-app-name
+```
+
+Replace `"my-app-name"` with the name of your application.
+
+7. Create an environment and deploy your application:
+
+```bash
+eb create my-env-name
+```
+
+Replace `"my-env-name"` with the name of your environment.
+
+8. Open your application in a web browser:
+
+```bash
+eb open
+```
+
+This will open a browser window using the URL of your application.
+
+Remember, this is a basic setup and might need modifications based on the specifics of your project. Also, note that AWS is not free and you will be charged based on your usage. Make sure to understand the pricing before you proceed.
